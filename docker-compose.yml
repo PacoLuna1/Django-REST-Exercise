@@ -1,41 +1,40 @@
 version: '3'
 services:
-  postgres_db:
+  postgres_db10:
     image: postgres:14-alpine
-    container_name: "postgres44"
+    container_name: "postgres10"
     environment:
-      - "POSTGRES_PASSWORD=SecretPassword123"
-      - "POSTGRES_DB=hazel_mtzdb"
-      - "POSTGRES_USER=hazel_mtz"
+      POSTGRES_PASSWORD: "123World000%"
+      POSTGRES_DB: "francisco_lunadb"
+      POSTGRES_USER: "francisco_luna"
     ports:
-      - "10044:5544"
+      - "10010:5510"
     volumes:
-      - "/home/hazel_mtz/postgres:/usr/src/postgres"
+      - "/home/francisco_luna/postgres:/usr/src/postgres"
     networks:
       - our-library-net
-    command: -p 5544
+    command: -p 5510
 
-  web:
+  web10:
     build: .
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && pytest && python manage.py runserver 0.0.0.0:8044"
-    container_name: "django44"
-    depends_on: 
-      - postgres_db
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8010"
+    container_name: "django10"
+    depends_on:
+      - postgres_db10
     environment:
-      - "PSQL_DBNAME=hazel_mtzdb"
-      - "PSQL_USERNAME=hazel_mtz"
-      - "PSQL_PASS=SecretPassword123"
-      - "PSQL_HOST=172.24.0.21" # You must use the previous command in order to get this HOST
-      - "PSQL_PORT=5544"
+      PSQL_DBNAME: "francisco_lunadb"
+      PSQL_USERNAME: "francisco_luna"
+      PSQL_PASS: "123World000%"
+      PSQL_HOST: "172.24.0.16"
+      PSQL_PORT: "5510"
     volumes:
-    # "RUTA/DEL/SERVIDOR:RUTA/DENTRO/DEL/CONTENEDOR"
-      - "/home/hazel_mtz/django/library:/usr/src/django/library"
+      - "/home/francisco_luna/Django-REST-Exercise:/usr/src/django/library"
     ports:
-      - "9044:8044"
+      - "9010:8010"
     networks:
       - our-library-net
-
 networks:
   our-library-net:
     external: true
     driver: bridge
+

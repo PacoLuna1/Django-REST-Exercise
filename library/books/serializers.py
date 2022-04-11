@@ -1,6 +1,22 @@
 from rest_framework import serializers
 from .models import *
 
+class PublisherSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Publisher
+    fields = ['id','name', 'location']
+
+  
+class LocationSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Location
+    fields = ['id','number', 'street','city','state','country']
+
+class GenreSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Genre
+    fields = ['id','name']
+
 class AuthorSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Author
@@ -11,7 +27,7 @@ class BookSerializer(serializers.ModelSerializer):
 	authors = serializers.StringRelatedField(many=True, read_only=True)
 	class Meta:
 		model = Book
-		fields = ['id', 'name', 'publish_year', 'pages', 'price', 'created_at', 'updated_at', 'authors']
+		fields = ['id', 'name', 'publish_year', 'pages', 'price', 'created_at', 'updated_at', 'authors','genre','publisher']
 	
 	"""
 	# def f(*args,**kwargs):  f(1,2,3,key1:4,key2:5):

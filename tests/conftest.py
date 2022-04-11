@@ -7,7 +7,7 @@ def user_2(db):
 	print('create-user2')
 	return user
 
-@pytest.fixture
+@pytest.fixture # FACTORY CREATED
 def new_user_factory(db):
 	def create_app_user(
 		username: str,

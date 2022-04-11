@@ -17,7 +17,7 @@ def test_no_user():
 	assert User.objects.count() == 0
 
 @pytest.fixture
-def user_1(db):
+def user_1(db): # Declare db
 	return User.objects.create_user('test-user')
 
 @pytest.mark.django_db
